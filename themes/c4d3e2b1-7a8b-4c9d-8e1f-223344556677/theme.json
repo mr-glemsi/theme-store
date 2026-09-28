@@ -1,0 +1,9 @@
+{
+  "id": "c4d3e2b1-7a8b-4c9d-8e1f-223344556677",
+  "name": "Focus Glance Suite",
+  "description": "Freezes, blurs, and dims the background when the Floating URL bar / New Tab is active.",
+  "author": "mr-glemsi",
+  "version": "1.0.0",
+  "homepage": "https://github.com/mr-glemsi/theme-store",
+  "tags": ["urlbar", "glance", "blur", "focus"]
+}
