@@ -1,64 +1,93 @@
 :root {
-  --glance-blur: 10px;
-  --glance-brightness: 0.65;
+  --glance-blur: 0px;
+  --glance-brightness: 1;
   --glance-scale: scale(1);
   --glance-vignette: none;
   --glance-rgb-display: none;
   --glance-crt-display: none;
 }
 
-/* 1. Blur Seviyesi */
-@media (-moz-pref("theme.focus_glance.blur_intensity", "none"))   { :root { --glance-blur: 0px; } }
-@media (-moz-pref("theme.focus_glance.blur_intensity", "low"))    { :root { --glance-blur: 5px; } }
-@media (-moz-pref("theme.focus_glance.blur_intensity", "medium")) { :root { --glance-blur: 10px; } }
-@media (-moz-pref("theme.focus_glance.blur_intensity", "heavy"))  { :root { --glance-blur: 18px; } }
-@media (-moz-pref("theme.focus_glance.blur_intensity", "ultra"))  { :root { --glance-blur: 35px; } }
+/* --- 1. BLUR SEVİYELERİ (Hem Attribute Hem Media Pref Desteği) --- */
+:root[theme-focus_glance-blur_intensity="none"],
+:root:has(#theme-Focus-Glance-Suite[theme-focus_glance-blur_intensity="none"]) { --glance-blur: 0px; }
 
-/* 2. Karartma */
-@media (-moz-pref("theme.focus_glance.dim_level", "none"))      { :root { --glance-brightness: 1; } }
-@media (-moz-pref("theme.focus_glance.dim_level", "light"))     { :root { --glance-brightness: 0.8; } }
-@media (-moz-pref("theme.focus_glance.dim_level", "dark"))      { :root { --glance-brightness: 0.65; } }
-@media (-moz-pref("theme.focus_glance.dim_level", "very-dark")) { :root { --glance-brightness: 0.35; } }
-@media (-moz-pref("theme.focus_glance.dim_level", "blackout"))  { :root { --glance-brightness: 0; } }
+:root[theme-focus_glance-blur_intensity="low"],
+:root:has(#theme-Focus-Glance-Suite[theme-focus_glance-blur_intensity="low"]) { --glance-blur: 5px; }
 
-/* 3. Zoom-Out */
+:root[theme-focus_glance-blur_intensity="medium"],
+:root:has(#theme-Focus-Glance-Suite[theme-focus_glance-blur_intensity="medium"]) { --glance-blur: 10px; }
+
+:root[theme-focus_glance-blur_intensity="heavy"],
+:root:has(#theme-Focus-Glance-Suite[theme-focus_glance-blur_intensity="heavy"]) { --glance-blur: 18px; }
+
+:root[theme-focus_glance-blur_intensity="ultra"],
+:root:has(#theme-Focus-Glance-Suite[theme-focus_glance-blur_intensity="ultra"]) { --glance-blur: 35px; }
+
+/* Yedek Firefox kuralı */
+@media (-moz-pref: "theme.focus_glance.blur_intensity", "none") { :root { --glance-blur: 0px; } }
+@media (-moz-pref: "theme.focus_glance.blur_intensity", "low") { :root { --glance-blur: 5px; } }
+@media (-moz-pref: "theme.focus_glance.blur_intensity", "medium") { :root { --glance-blur: 10px; } }
+@media (-moz-pref: "theme.focus_glance.blur_intensity", "heavy") { :root { --glance-blur: 18px; } }
+@media (-moz-pref: "theme.focus_glance.blur_intensity", "ultra") { :root { --glance-blur: 35px; } }
+
+
+/* --- 2. KARARTMA SEVİYELERİ --- */
+:root[theme-focus_glance-dim_level="none"],
+:root:has(#theme-Focus-Glance-Suite[theme-focus_glance-dim_level="none"]) { --glance-brightness: 1; }
+
+:root[theme-focus_glance-dim_level="light"],
+:root:has(#theme-Focus-Glance-Suite[theme-focus_glance-dim_level="light"]) { --glance-brightness: 0.8; }
+
+:root[theme-focus_glance-dim_level="dark"],
+:root:has(#theme-Focus-Glance-Suite[theme-focus_glance-dim_level="dark"]) { --glance-brightness: 0.65; }
+
+:root[theme-focus_glance-dim_level="very-dark"],
+:root:has(#theme-Focus-Glance-Suite[theme-focus_glance-dim_level="very-dark"]) { --glance-brightness: 0.35; }
+
+:root[theme-focus_glance-dim_level="blackout"],
+:root:has(#theme-Focus-Glance-Suite[theme-focus_glance-dim_level="blackout"]) { --glance-brightness: 0; }
+
+/* Yedek Firefox kuralı */
+@media (-moz-pref: "theme.focus_glance.dim_level", "none") { :root { --glance-brightness: 1; } }
+@media (-moz-pref: "theme.focus_glance.dim_level", "light") { :root { --glance-brightness: 0.8; } }
+@media (-moz-pref: "theme.focus_glance.dim_level", "dark") { :root { --glance-brightness: 0.65; } }
+@media (-moz-pref: "theme.focus_glance.dim_level", "very-dark") { :root { --glance-brightness: 0.35; } }
+@media (-moz-pref: "theme.focus_glance.dim_level", "blackout") { :root { --glance-brightness: 0; } }
+
+
+/* --- 3. KUTUCUKLAR (CHECKBOXES) --- */
 @media (-moz-bool-pref: "theme.focus_glance.zoom_out") {
   :root { --glance-scale: scale(0.975); }
 }
 
-/* 4. Vignette */
 @media (-moz-bool-pref: "theme.focus_glance.vignette") {
   :root { --glance-vignette: radial-gradient(circle, transparent 40%, rgba(0, 0, 0, 0.85) 100%); }
 }
 
-/* 5. RGB Kenarlık */
 @media (-moz-bool-pref: "theme.focus_glance.rgb_border") {
   :root { --glance-rgb-display: block; }
 }
 
-/* 6. CRT Çizgileri */
 @media (-moz-bool-pref: "theme.focus_glance.crt_scanlines") {
   :root { --glance-crt-display: block; }
 }
 
-/* Yumuşak Animasyon */
+
+/* --- GEÇİŞLER VE SAYFA ETKİSİ --- */
 #browser {
   transition: filter 0.22s cubic-bezier(0.4, 0, 0.2, 1), transform 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* Sadece Ortadaki Yeni Sekme Çubuğu Açılınca */
 #main-window:has(#urlbar[zen-floating-urlbar="true"][open]) #browser,
 #main-window:has(#urlbar[zen-glance="true"][open]) #browser,
-#main-window:has([zen-floating-urlbar][open]) #browser,
 #main-window:has(#urlbar-search-splitter[open]) #browser {
   filter: blur(var(--glance-blur)) brightness(var(--glance-brightness)) !important;
   transform: var(--glance-scale) !important;
 }
 
-/* Dışarı Tıklamayı Yakalayan ve Sayfayı Donduran Katman */
+/* Dışarı Tıklama / Donma Katmanı */
 #main-window:has(#urlbar[zen-floating-urlbar="true"][open]) #tabbrowser-tabpanels::before,
 #main-window:has(#urlbar[zen-glance="true"][open]) #tabbrowser-tabpanels::before,
-#main-window:has([zen-floating-urlbar][open]) #tabbrowser-tabpanels::before,
 #main-window:has(#urlbar-search-splitter[open]) #tabbrowser-tabpanels::before {
   content: "" !important;
   position: fixed !important;
@@ -69,10 +98,9 @@
   background-size: cover;
 }
 
-/* Dönen RGB Kenarlık Çerçevesi */
+/* Dönen RGB Kenarlık */
 #main-window:has(#urlbar[zen-floating-urlbar="true"][open])::after,
 #main-window:has(#urlbar[zen-glance="true"][open])::after,
-#main-window:has([zen-floating-urlbar][open])::after,
 #main-window:has(#urlbar-search-splitter[open])::after {
   content: "" !important;
   display: var(--glance-rgb-display) !important;
@@ -81,7 +109,7 @@
   z-index: 99 !important;
   pointer-events: none !important;
   padding: 4px;
-  background: conic-gradient(from var(--rgb-angle, 0deg), #ff0055, #7a00ff, #00e5ff, #00ff66, #ffea00, #ff0055);
+  background: conic-gradient(from var(--rgb-angle, 0deg), #ff0055, #7a00ff, #00b5ff, #00ff66, #ffea00, #ff0055);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -93,14 +121,14 @@
   initial-value: 0deg;
   inherits: false;
 }
+
 @keyframes rotateRGB {
   to { --rgb-angle: 360deg; }
 }
 
-/* CRT Çizgileri Katmanı */
+/* CRT Çizgileri */
 #main-window:has(#urlbar[zen-floating-urlbar="true"][open]) #tabbrowser-tabpanels::after,
 #main-window:has(#urlbar[zen-glance="true"][open]) #tabbrowser-tabpanels::after,
-#main-window:has([zen-floating-urlbar][open]) #tabbrowser-tabpanels::after,
 #main-window:has(#urlbar-search-splitter[open]) #tabbrowser-tabpanels::after {
   content: "" !important;
   display: var(--glance-crt-display) !important;
@@ -117,7 +145,7 @@
   );
 }
 
-/* URL bar, öneriler ve sağ tık koruması */
+/* URL Bar Öncelik */
 #urlbar-container,
 #urlbar,
 #urlbar-results,
